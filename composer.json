@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/protobuf": "^4.32",
+        "textalk/websocket": "^1.6",
+        "thedudeguy/rcon": "^1.0"
+    }
+}

@@ -1,0 +1,25 @@
+[2026-02-02 20:01:16] Got a new client connected. Checking access key... [ZSNChampions LOG]
+[2026-02-02 20:01:16] Client authorized. Checking method... [ZSNChampions LOG]
+[2026-02-02 20:01:16] Method OK. Checking headers... [ZSNChampions LOG]
+[2026-02-02 20:01:16] Headers OK: FileName=2026-02-02_20-48-57-MATCH_1-de_ancient-TEST1_vs_TEST2.dem, MatchId=1 [ZSNChampions LOG]
+[2026-02-02 20:01:16] Preparing to save demo file... [ZSNChampions LOG]
+[2026-02-02 20:01:16] Tworze folder dla match_id 1 [ZSNChampions LOG]
+[2026-02-02 20:01:16] Read raw body content, size: 28531683 bytes [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:01:16] Raw body content read successfully. [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:01:16] Uploaded new demo (raw): 2026-02-02_20-48-57-MATCH_1-de_ancient-TEST1_vs_TEST2.dem [ZSNChampions LOG] | DATA: {"match_id":"1","size":28531683,"path":"/home/bagieta/web/zsnturniej.0bg.pl/public_html/uploads/1/2026-02-02_20-48-57-MATCH_1-de_ancient-TEST1_vs_TEST2.dem"}
+[2026-02-02 20:11:39] Got a new client connected. Checking access key... [ZSNChampions LOG]
+[2026-02-02 20:11:39] Client authorized. Checking method... [ZSNChampions LOG]
+[2026-02-02 20:11:39] Method OK. Checking headers... [ZSNChampions LOG]
+[2026-02-02 20:11:39] Headers OK: FileName=2026-02-02_21-02-21-MATCH_1-de_mirage-TEST1_vs_TEST2.dem, MatchId=1 [ZSNChampions LOG]
+[2026-02-02 20:11:39] Preparing to save demo file... [ZSNChampions LOG]
+[2026-02-02 20:11:39] Read raw body content, size: 17027533 bytes [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:11:39] Raw body content read successfully. [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:11:39] Uploaded new demo (raw): 2026-02-02_21-02-21-MATCH_1-de_mirage-TEST1_vs_TEST2.dem [ZSNChampions LOG] | DATA: {"match_id":"1","size":17027533,"path":"/home/bagieta/web/zsnturniej.0bg.pl/public_html/uploads/1/2026-02-02_21-02-21-MATCH_1-de_mirage-TEST1_vs_TEST2.dem"}
+[2026-02-02 20:25:19] Got a new client connected. Checking access key... [ZSNChampions LOG]
+[2026-02-02 20:25:19] Client authorized. Checking method... [ZSNChampions LOG]
+[2026-02-02 20:25:19] Method OK. Checking headers... [ZSNChampions LOG]
+[2026-02-02 20:25:19] Headers OK: FileName=2026-02-02_21-13-08-MATCH_1-de_dust2-TEST1_vs_TEST2.dem, MatchId=1 [ZSNChampions LOG]
+[2026-02-02 20:25:19] Preparing to save demo file... [ZSNChampions LOG]
+[2026-02-02 20:25:19] Read raw body content, size: 24146701 bytes [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:25:19] Raw body content read successfully. [ZSNChampions LOG] | DATA: {"match_id":"1"}
+[2026-02-02 20:25:19] Uploaded new demo (raw): 2026-02-02_21-13-08-MATCH_1-de_dust2-TEST1_vs_TEST2.dem [ZSNChampions LOG] | DATA: {"match_id":"1","size":24146701,"path":"/home/bagieta/web/zsnturniej.0bg.pl/public_html/uploads/1/2026-02-02_21-13-08-MATCH_1-de_dust2-TEST1_vs_TEST2.dem"}
