@@ -11,28 +11,52 @@ try {
         $check = $pdo->query("SELECT COUNT(*) FROM mecze WHERE round = 1")->fetchColumn();
         if ($check == 0) {
             // pobierz drużyny
-            $teams = $pdo->query("SELECT id FROM teams")->fetchAll(PDO::FETCH_COLUMN);
+            $stmt = $pdo->query("
+                SELECT t.id
+                FROM teams t
+                JOIN users u ON t.id = u.team_id
+                GROUP BY t.id
+                HAVING COUNT(u.id) >= 5
+            ");
+            $teams = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (count($teams) >= 2) {
-                shuffle($teams);
-                $matchNumber = 1;
-                $currentDate = new DateTime('next week');
-                $currentDate->modify('18:00');
-                foreach (array_chunk($teams, 2) as $pair) {
-                    $team1 = $pair[0];
-                    $team2 = $pair[1] ?? null;
-                    $stmt = $pdo->prepare("
-                        INSERT INTO mecze (team1, team2, round, match_number, termin)
-                        VALUES (?, ?, 1, ?, ?)
-                    ");
-                    $stmt->execute([$team1, $team2, $matchNumber, $currentDate->format('Y-m-d H:i:s')]);
-                    $matchNumber++;
-                    $currentDate->modify('+1 day');
+                $pdo->beginTransaction();
+                try {
+                    shuffle($teams);
+                    $matchNumber = 1;
+                    $currentDate = new DateTime('next week');
+                    $currentDate->modify('18:00');
+                    $chunks = array_chunk($teams, 2);
+                    foreach ($chunks as $pair) {
+                        $team1 = $pair[0]['id'];
+                        $team2 = isset($pair[1]) ? $pair[1]['id'] : null;
+
+                        if ($team2 === null) {
+                            $stmt = $pdo->prepare("
+                                INSERT INTO mecze (team1, team2, round, match_number, termin, team1_wins, winner_id)
+                                VALUES (?, NULL, 1, ?, ?, 2, ?)
+                            ");
+                            $stmt->execute([$team1, $matchNumber, $currentDate->format('Y-m-d H:i:s'), $team1]);
+                        } else {
+                            $stmt = $pdo->prepare("
+                                INSERT INTO mecze (team1, team2, round, match_number, termin)
+                                VALUES (?, ?, 1, ?, ?)
+                            ");
+                            $stmt->execute([$team1, $team2, $matchNumber, $currentDate->format('Y-m-d H:i:s')]);
+                        }
+                        $matchNumber++;
+                        $currentDate->modify('+1 day');
+                    }
+                    $pdo->commit();
+                } catch (Exception $e) {
+                    $pdo->rollBack();
+                    throw $e;
                 }
             }
         }
     }
 } catch (PDOException $e) {
-    // echo "Błąd CRONa: " . $e->getMessage();
+    error_log('PSEUDO CRON ERROR: ' . $e->getMessage());
 }
 
 try {

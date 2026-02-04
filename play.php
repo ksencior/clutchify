@@ -67,19 +67,25 @@ if (isset($teamID) && $teamID!=NULL) {
         $stmt->execute([':teamId1' => $teamID, ':teamId2' => $teamID]);
         $nearestMatch = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare("SELECT id FROM lobbies WHERE mecz_id = :mid");
-        $stmt->execute([':mid' => $nearestMatch['id']]);
-        $lobby = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($lobby) {
-            header('Location: lobby.php?id='.$lobby['id']);
-        }
+        if ($nearestMatch) {
+            $stmt = $pdo->prepare("SELECT id FROM lobbies WHERE mecz_id = :mid");
+            $stmt->execute([':mid' => $nearestMatch['id']]);
+            $lobby = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($lobby) {
+                header('Location: lobby.php?id='.$lobby['id']);
+            }
 
-        $stmt = $pdo->prepare("SELECT user_id FROM ready_players WHERE mecz_id = ? AND user_id = ?");
-        $stmt->execute([$nearestMatch['id'], $_SESSION['id']]);
-        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
-            $isReady = true;
+            $stmt = $pdo->prepare("SELECT user_id FROM ready_players WHERE mecz_id = ? AND user_id = ?");
+            $stmt->execute([$nearestMatch['id'], $_SESSION['id']]);
+            if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+                $isReady = true;
+            } else {
+                $isReady = false;
+            }
         } else {
             $isReady = false;
+            $readyCountTeam = 0;
+            $readyCountAll = 0;
         }
 
 
@@ -202,32 +208,34 @@ if (isset($teamID) && $teamID!=NULL) {
             </div>
             <div class="play-menu">
                 <?php
-                    switch ($nearestMatch['round']) {
-                        case 1: $roundName = "BO3"; break;
-                        case 2: $roundName = "BO3"; break;
-                        case 3: $roundName = "BO3"; break;
-                        case 4: $roundName = "BO3"; break;
-                        case 5: $roundName = "BO5"; break;
-                        default: $roundName = "-"; break;
-                    }
+                    // switch ($nearestMatch['round']) {
+                    //     case 1: $roundName = "BO3"; break;
+                    //     case 2: $roundName = "BO3"; break;
+                    //     case 3: $roundName = "BO3"; break;
+                    //     case 4: $roundName = "BO3"; break;
+                    //     case 5: $roundName = "BO5"; break;
+                    //     default: $roundName = "-"; break;
+                    // }
+                    $roundName = "BO3";
+                    if ($nearestMatch){
+                        try {
+                            $stmt = $pdo->prepare("SELECT 
+                                                    COUNT(*) AS ready_count_all,
+                                                    SUM(CASE WHEN r.team_id = :teamId THEN 1 ELSE 0 END) AS ready_count_team
+                                                FROM ready_players r
+                                                WHERE r.mecz_id = :matchId
+                                            ");
+                                            $stmt->execute([
+                                                ':matchId' => $nearestMatch['id'],
+                                                ':teamId'  => $teamID
+                                            ]);
+                                            $readyInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    try {
-                        $stmt = $pdo->prepare("SELECT 
-                                                COUNT(*) AS ready_count_all,
-                                                SUM(CASE WHEN r.team_id = :teamId THEN 1 ELSE 0 END) AS ready_count_team
-                                            FROM ready_players r
-                                            WHERE r.mecz_id = :matchId
-                                        ");
-                                        $stmt->execute([
-                                            ':matchId' => $nearestMatch['id'],
-                                            ':teamId'  => $teamID
-                                        ]);
-                                        $readyInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                                        $readyCountAll  = $readyInfo['ready_count_all'] ?? 0;
-                                        $readyCountTeam = $readyInfo['ready_count_team'] ?? 0;
-                    } catch (PDOException $e) {
-                        echo $e->getMessage();
+                                            $readyCountAll  = $readyInfo['ready_count_all'] ?? 0;
+                                            $readyCountTeam = $readyInfo['ready_count_team'] ?? 0;
+                        } catch (PDOException $e) {
+                            echo $e->getMessage();
+                        }
                     }
 
                     $buttonEnabled = false;
