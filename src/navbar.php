@@ -1,7 +1,7 @@
 <?php 
 echo '
 <div class="sidebar-left">
-    <img src="img/logo.png" alt="" class="logo" onclick="window.location.href=`index.php`">
+    <img src="img/clutchify-w-o-text.png" alt="" class="logo" onclick="window.location.href=`index.php`">
     <div class="menu">
         <a href="play.php">
             <i class="fa-solid fa-gamepad"></i><span>Graj</span>
