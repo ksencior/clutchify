@@ -1,6 +1,7 @@
 <?php 
+session_start();
 include_once 'src/core/connect_db.php';
-include_once 'src/auth/fetch_steam_data.php';
+//include_once 'src/auth/fetch_steam_data.php';
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
 }

@@ -9,27 +9,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password2 = $_POST['password2'] ?? '';
 
     if ($nickname === '' || $email === '' || $password === '' || $password2 === '') {
-        header('Location: ../register.php?err=no-inputs');
+        header('Location: /clutchify/register.php?err=no-inputs');
         exit;
     }
 
     if (strlen($password) < 3) {
-        header('Location: ../register.php?err=bad-password');
+        header('Location: /clutchify/register.php?err=bad-password');
         exit;
     }
 
     if (strlen($nickname) < 3) {
-        header('Location: ../register.php?err=bad-username');
+        header('Location: /clutchify/register.php?err=bad-username');
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@zsngasawa.pl')) {
-        header('Location: ../register.php?err=email-not-valid');
+        header('Location: /clutchify/register.php?err=email-not-valid');
         exit;
     }
 
     if ($password !== $password2) {
-        header('Location: ../register.php?err=passwords-no-match');
+        header('Location: /clutchify/register.php?err=passwords-no-match');
         exit;
     }
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email OR username = :nickname");
         $stmt->execute(['email' => $email, 'nickname' => $nickname]);
         if ($stmt->fetchColumn() > 0) {
-            header('Location: ../register.php?err=user-exists');
+            header('Location: /clutchify/register.php?err=user-exists');
             exit;
         }
 
@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'hash' => $hash
         ]);
 
-        header('Location: ../login.php?registered=true');
+        header('Location: /clutchify/login.php?registered=true');
         exit;
     } catch (PDOException $e) {
-        header('Location: ../register.php?err=server');
+        header('Location: /clutchify/register.php?err=server');
         exit;
     }
 }

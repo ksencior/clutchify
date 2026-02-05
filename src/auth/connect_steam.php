@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/steam/openid.php';
 require_once __DIR__ . '/../core/connect_db.php';
 
-$openid = new LightOpenID('zsnturniej.0bg.pl');
+$openid = new LightOpenID('localhost/clutchify');
 
 if (!$openid->mode) {
     // Rozpocznij autoryzację przez Steam
@@ -28,7 +28,7 @@ if (!$openid->mode) {
     
         $_SESSION['steam_id'] = $steamid64;
         include_once __DIR__ . '/fetch_steam_data.php';
-        header('Location: ../index.php');
+        header('Location: /clutchify/index.php');
         exit;
     } else {
         die("Nie udało się odczytać steamID.");

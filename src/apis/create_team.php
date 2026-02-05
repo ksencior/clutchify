@@ -2,7 +2,7 @@
 session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
-    header('Location: ../login.php');
+    header('Location: /clutchify/login.php');
     exit;
 }
 
@@ -12,17 +12,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nazwa'], $_POST['skrot'
     $leader = $_SESSION['id'];
 
     if (trim($nazwa) == '' && trim($skrot) == '') {
-        header('Location: ../team_create.php?error=empty_fields');
+        header('Location: /clutchify/team_create.php?error=empty_fields');
         exit();
     }
 
     if (strlen($nazwa) < 3 || strlen($nazwa) > 20) {
-        header('Location: ../team_create.php?error=invalid_name');
+        header('Location: /clutchify/team_create.php?error=invalid_name');
         exit();
     }
 
     if (strlen($skrot) < 1 || strlen($skrot) > 4) {
-        header('Location: ../team_create.php?error=invalid_skrot');
+        header('Location: /clutchify/team_create.php?error=invalid_skrot');
         exit();
     }
 
@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nazwa'], $_POST['skrot'
         $_SESSION['team_id'] = $newTeamId;
         $_SESSION['team_name'] = $nazwa;
         $_SESSION['team_skrot'] = $skrot;
-        header('Location: ../team.php?id='.$newTeamId);
+        header('Location: /clutchify/team.php?id='.$newTeamId);
         exit();
     } catch (PDOException $e) {
         echo "Wystąpił błąd: " . $e->getMessage();
