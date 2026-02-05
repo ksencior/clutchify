@@ -35,8 +35,8 @@ if (isset($_GET['registered']) && $_GET['registered'] == 'true') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zaloguj się</title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
     <meta name="description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
 
@@ -45,14 +45,14 @@ if (isset($_GET['registered']) && $_GET['registered'] == 'true') {
     <meta property="og:url" content="https://zsnturniej.0bg.pl/" />
     <meta property="og:title" content="ZSN CHAMPIONS III" />
     <meta property="og:description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
-    <meta property="og:image" content="https://zsnturniej.0bg.pl/img/promo_poster.png" />
+    <meta property="og:image" content="https://zsnturniej.0bg.pl/assets/img/promo_poster.png" />
 
     <!-- X (Twitter) -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://zsnturniej.0bg.pl/" />
     <meta property="twitter:title" content="ZSN CHAMPIONS III" />
     <meta property="twitter:description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
-    <meta property="twitter:image" content="https://zsnturniej.0bg.pl/img/promo_poster.png" />
+    <meta property="twitter:image" content="https://zsnturniej.0bg.pl/assets/img/promo_poster.png" />
 </head>
 <body>
     <div id="root" class="root-login">

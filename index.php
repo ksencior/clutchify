@@ -28,12 +28,12 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= Config::get('app_name', 'ZSN Champions III') ?></title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js?v=<?= time() ?>"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js?v=<?= time() ?>"></script>
+    <script src="assets/js/chat.js"></script>
     <!-- Primary Meta Tags -->
     <meta name="title" content="ZSN CHAMPIONS III" />
     <meta name="description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
@@ -58,7 +58,7 @@ try {
     <div id="root">
         <?php include 'src/navbar.php'; ?>
         <div class="content">
-            <img src="img/promo_poster.png" alt="" class="promo-poster">
+            <img src="assets/img/promo_poster.png" alt="" class="promo-poster">
             <?php if ($matchLive): ?>
             <div class="livestream">
                 <div class="live-title">
@@ -81,7 +81,7 @@ try {
             <?php endif; ?>
             <div class="account-info">
                 <h1>Twoje konto</h1>
-                    <img src="<?php echo isset($_SESSION['avatar_url']) && !empty($_SESSION['avatar_url']) ? $_SESSION['avatar_url'] : 'img/avatar_default.png'; ?>" alt="Avatar uzytkownika" class="avatar">
+                    <img src="<?php echo isset($_SESSION['avatar_url']) && !empty($_SESSION['avatar_url']) ? $_SESSION['avatar_url'] : 'assets/img/avatar_default.png'; ?>" alt="Avatar uzytkownika" class="avatar">
                 <div class="info">
                     <h2><?php echo htmlspecialchars($_SESSION['username']); ?></h2>
                     <?php 
@@ -179,6 +179,6 @@ try {
             </div>
         </div>
     </div>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

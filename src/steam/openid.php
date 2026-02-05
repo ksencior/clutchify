@@ -100,3 +100,4 @@ class LightOpenID {
         return isset($matches[1]) ? $matches[1] : false;
     }
 }
+

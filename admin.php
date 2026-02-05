@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administratora | <?= htmlspecialchars(Config::get('app_name', 'ZSN Champions')) ?></title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
     <style>
         :root {
             --primary-color: <?= Config::get('primary_color', '#a268ff') ?>;

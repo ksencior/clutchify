@@ -1,7 +1,7 @@
 <?php 
 echo '
 <div class="sidebar-left">
-    <img src="img/clutchify-w-o-text.png" alt="" class="logo" onclick="window.location.href=`index.php`">
+    <img src="assets/img/clutchify-w-o-text.png" alt="" class="logo" onclick="window.location.href=`index.php`">
     <div class="menu">
         <a href="play.php">
             <i class="fa-solid fa-gamepad"></i><span>Graj</span>
@@ -28,7 +28,7 @@ echo '">
         <i class="fa-solid fa-bars" style="font-size: 150%;" id="mobile-menu-btn"></i>
     </div>
     <div class="mobile-logo" onclick="window.location.href=`index.php`">
-        <img src="img/logo.png" alt="" class="logo">
+        <img src="assets/img/logo.png" alt="" class="logo">
     </div>
 </div>
 <div class="mobile-navbar">

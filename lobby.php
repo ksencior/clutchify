@@ -62,7 +62,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     });
 
     foreach ($players as $player) {
-        $avatar = $player['avatar_url'] ? htmlspecialchars($player['avatar_url']) : 'img/avatar_default.png';
+        $avatar = $player['avatar_url'] ? htmlspecialchars($player['avatar_url']) : 'assets/img/avatar_default.png';
         $username = htmlspecialchars($player['username']);
         $isLeader = $player['id'] == $leaderId;
 
@@ -79,12 +79,12 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?=time()?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?=time()?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/chat.js"></script>
     <script>
         function debounce(func, delay) {
             let timeout;
@@ -126,7 +126,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                             <?php foreach ($maps as $map): ?>
                                 <?php $mapNameFormatted = str_replace(' ', '', $map) ?>
                                 <button class="map-btn" data-map="<?= $map ?>">
-                                    <img src="img/maps/<?= strtolower($mapNameFormatted) ?>.jpeg?v=10112025">
+                                    <img src="assets/img/maps/<?= strtolower($mapNameFormatted) ?>.jpeg?v=10112025">
                                     <span><?= $mapNameFormatted ?></span>
                                 </button>
                             <?php endforeach; ?>
@@ -368,7 +368,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                                 mapNameFormatted = v.map_name.replaceAll(' ', '')
                                 finalMaps.innerHTML += `
                                     <div class="map-picked"}">
-                                        <img src="img/maps/${mapNameFormatted.toLowerCase()}.jpeg?v=10112025">
+                                        <img src="assets/img/maps/${mapNameFormatted.toLowerCase()}.jpeg?v=10112025">
                                         <span>${v.map_name}</span>
                                     </div>`;
                             });
@@ -447,7 +447,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                         `${data.score.team1} : ${data.score.team2}`;
                     currentMapDiv.innerHTML = `
                             <div class="map-picked active started">
-                                <img src="img/maps/${data.active_map_name.toLowerCase()}.jpeg?v=10112025">
+                                <img src="assets/img/maps/${data.active_map_name.toLowerCase()}.jpeg?v=10112025">
                                 <span>${data.active_map_name}</span>
                             </div>`;
                     // fetch statsy
@@ -561,6 +561,6 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
         vetoTimer = setInterval(fetchVeto, vetoInterval);
     });
     </script>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

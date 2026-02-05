@@ -72,7 +72,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     });
 
     foreach ($players as $player) {
-        $avatar = $player['avatar_url'] ? htmlspecialchars($player['avatar_url']) : 'img/avatar_default.png';
+        $avatar = $player['avatar_url'] ? htmlspecialchars($player['avatar_url']) : 'assets/img/avatar_default.png';
         $username = htmlspecialchars($player['username']);
         $isLeader = $player['id'] == $leaderId;
 
@@ -89,12 +89,12 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?=time()?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?=time()?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/chat.js"></script>
     <script>
         function debounce(func, delay) {
             let timeout;
@@ -154,7 +154,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                         <div class="game-summary">
                             <div class="g-summary-title">
                                 <div class="map-picked" style="width: 30%; margin: auto;">
-                                    <img src="img/maps/<?= $mapNameCodename? $mapNameCodename : $mapNameFormatted ?>.jpeg?v=10112025" style="filter: blur(2px); grayscale(50%);">
+                                    <img src="assets/img/maps/<?= $mapNameCodename? $mapNameCodename : $mapNameFormatted ?>.jpeg?v=10112025" style="filter: blur(2px); grayscale(50%);">
                                     <span><?= $mapNameFormatted ?></span>
                                 </div>
                             </div>
@@ -173,7 +173,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                                 foreach ($bestPlayers as $index => $bp) {
                                     $playerInfo = $pdo->query('SELECT username, avatar_url FROM users WHERE id = ' . (int)$bp['user_id'])->fetch(PDO::FETCH_ASSOC);
                                     if (!$playerInfo['avatar_url']) {
-                                        $playerInfo['avatar_url'] = 'img/avatar_default.png';
+                                        $playerInfo['avatar_url'] = 'assets/img/avatar_default.png';
                                     }
 
                                     $places = ['Pierwsze', 'Drugie', 'Trzecie'];
@@ -285,7 +285,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                                             $hsPercent = $player['kills'] > 0 ? round(($player['headshots'] / $player['kills']) * 100, 2) : 0;
                                             $playerInfo = $pdo->query('SELECT username, avatar_url FROM users WHERE id = ' . (int)$player['user_id'])->fetch(PDO::FETCH_ASSOC);
                                             if (!$playerInfo['avatar_url']) {
-                                                $playerInfo['avatar_url'] = 'img/avatar_default.png';
+                                                $playerInfo['avatar_url'] = 'assets/img/avatar_default.png';
                                             }
                                             echo "<tr>
                                                     <td class='stats-player' style='width: 80%'><img src='".$playerInfo['avatar_url']."'><a href='profile.php?id=".$player['user_id']."'>". htmlspecialchars($playerInfo['username']) ."</a></td>
@@ -339,7 +339,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                                             $hsPercent = $player['kills'] > 0 ? round(($player['headshots'] / $player['kills']) * 100, 2) : 0;
                                             $playerInfo = $pdo->query('SELECT username, avatar_url FROM users WHERE id = ' . (int)$player['user_id'])->fetch(PDO::FETCH_ASSOC);
                                             if (!$playerInfo['avatar_url']) {
-                                                $playerInfo['avatar_url'] = 'img/avatar_default.png';
+                                                $playerInfo['avatar_url'] = 'assets/img/avatar_default.png';
                                             }
                                             echo "<tr>
                                                     <td class='stats-player' style='width: 80%'><img src='".$playerInfo['avatar_url']."'><a href='profile.php?id=".$player['user_id']."'>". htmlspecialchars($playerInfo['username']) ."</a></td>
@@ -410,6 +410,6 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
         });
     });
     </script>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

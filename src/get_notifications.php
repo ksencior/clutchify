@@ -20,3 +20,4 @@ $update = $pdo->prepare("UPDATE notifications SET seen = 1 WHERE user_id = :uid 
 $update->execute([':uid' => $_SESSION['id']]);
 
 echo json_encode($notifications);
+

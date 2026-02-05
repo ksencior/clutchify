@@ -100,12 +100,12 @@ if (isset($teamID) && $teamID!=NULL) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/chat.js"></script>
     <script>
         function debounce(func, delay) {
             let timeout;
@@ -163,12 +163,12 @@ if (isset($teamID) && $teamID!=NULL) {
                     for ($i = 0; $i < 2; $i++) {
                         if (isset($users[$i])) {
                             echo '<div class="player-card" data-id="'.$users[$i]['id'].'">
-                                <img src="'.($users[$i]['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                                <img src="'.($users[$i]['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                                 <h3>'.$users[$i]['username'].'</h3>
                             </div>';
                         } else {
                             echo '<div class="player-card empty">
-                                <img src="img/avatar_default.png" alt="">
+                                <img src="assets/img/avatar_default.png" alt="">
                                 <h3>Puste miejsce</h3>';
                             echo '</div>';
                         }
@@ -177,13 +177,13 @@ if (isset($teamID) && $teamID!=NULL) {
                     // Lider na środku
                     if ($leader) {
                         echo '<div class="player-card leader" data-id="'.$leader['id'].'">
-                            <img src="'.($leader['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                            <img src="'.($leader['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                             <h3>'.$leader['username'].'</h3>
                             <p>Lider</p>
                         </div>';
                     } else {
                         echo '<div class="player-card leader empty">
-                            <img src="img/avatar_default.png" alt="">
+                            <img src="assets/img/avatar_default.png" alt="">
                             <h3>Puste miejsce</h3>
                             <p>Lider</p>
                         </div>';
@@ -193,12 +193,12 @@ if (isset($teamID) && $teamID!=NULL) {
                     for ($i = 2; $i < 4; $i++) {
                         if (isset($users[$i])) {
                             echo '<div class="player-card" data-id="'.$users[$i]['id'].'">
-                                <img src="'.($users[$i]['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                                <img src="'.($users[$i]['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                                 <h3>'.$users[$i]['username'].'</h3>
                             </div>';
                         } else {
                             echo '<div class="player-card empty">
-                                <img src="img/avatar_default.png" alt="">
+                                <img src="assets/img/avatar_default.png" alt="">
                                 <h3>Puste miejsce</h3>';
                             echo '</div>';
                         }
@@ -399,6 +399,6 @@ if (isset($teamID) && $teamID!=NULL) {
             updateStatus();
         });
     </script>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

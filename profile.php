@@ -61,12 +61,12 @@ if (isset($userid) && $userid!=NULL) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js?v=<?= time() ?>"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js?v=<?= time() ?>"></script>
+    <script src="assets/js/chat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -74,7 +74,7 @@ if (isset($userid) && $userid!=NULL) {
         <?php include 'src/navbar.php'; ?>
         <div class="content">
             <div class="profile-info">
-                <img src="<?php echo (isset($avatar) && !empty($avatar)) ? $avatar : 'img/avatar_default.png'; ?>" alt="Avatar uzytkownika" class="avatar">
+                <img src="<?php echo (isset($avatar) && !empty($avatar)) ? $avatar : 'assets/img/avatar_default.png'; ?>" alt="Avatar uzytkownika" class="avatar">
                 <div class="name">
                     <h1><?php echo "$username" ?></h1>
                     <p class="team-name"><?php echo ($teamName!=NULL)?$teamName:"Brak drużyny"; ?></p>
@@ -241,7 +241,7 @@ if (isset($userid) && $userid!=NULL) {
             </div>
         </div>
     </div>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
     <script>
         function createChart(canvasId, statKey) {
             let filler = stats[statKey].length > 0 ? Math.max(...stats[statKey]) * 0.1 : 1;

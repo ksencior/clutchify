@@ -73,7 +73,7 @@ echo '
     <div class="profile">
         <img src="
 ';
-echo (isset($_SESSION['avatar_url']) && !empty($_SESSION['avatar_url']))? $_SESSION['avatar_url'] : 'img/avatar_default.png'; 
+echo (isset($_SESSION['avatar_url']) && !empty($_SESSION['avatar_url']))? $_SESSION['avatar_url'] : 'assets/img/avatar_default.png'; 
 $isAdmin = isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true;
 $isSpectator = isset($_SESSION['isSpectator']) && $_SESSION['isSpectator'] == true;
 echo '
@@ -98,7 +98,7 @@ echo '
         <div class="line"></div>
     </div>
     <div class="socials">
-        <a href="https://discord.gg/VCdBre9fVv" title="Discord" target="_blank" style="justify-self: flex-end;"><img class="discord-button" src="img/discord-icon.jpg" style="width: 100%; border-radius: 8px;"></a>
+        <a href="https://discord.gg/VCdBre9fVv" title="Discord" target="_blank" style="justify-self: flex-end;"><img class="discord-button" src="assets/img/discord-icon.jpg" style="width: 100%; border-radius: 8px;"></a>
     </div>
 </div>
 ';

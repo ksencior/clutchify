@@ -72,3 +72,4 @@ echo json_encode([
     'lobby_id' => $lobbyId,
     'is_started' => $isStarted
 ]);
+

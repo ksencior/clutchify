@@ -54,3 +54,4 @@ echo json_encode([
     'ready_count_all'  => (int)$counts['ready_count_all'],
     'ready_count_team' => (int)$counts['ready_count_team']
 ]);
+

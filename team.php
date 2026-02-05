@@ -85,12 +85,12 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js" defer></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js" defer></script>
+    <script src="assets/js/chat.js"></script>
     <script>
         function debounce(func, delay) {
             let timeout;
@@ -143,7 +143,7 @@ try {
                     for ($i = 0; $i < 2; $i++) {
                         if (isset($users[$i])) {
                             echo '<div class="player-card" data-id="'.$users[$i]['id'].'">
-                                <img src="'.($users[$i]['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                                <img src="'.($users[$i]['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                                 <h3>'.$users[$i]['username'].'</h3>';
                             if ($isLeader && $isRegistrationOpen) {
                                 echo '<button class="action-btn kick-player" data-player-id="'.$users[$i]['id'].'" title="Wyrzuć gracza">
@@ -153,7 +153,7 @@ try {
                             echo '</div>';
                         } else {
                             echo '<div class="player-card empty">
-                                <img src="img/avatar_default.png" alt="">
+                                <img src="assets/img/avatar_default.png" alt="">
                                 <h3>Puste miejsce</h3>';
                             if ($isLeader) {
                                 echo '<button class="invite-btn" data-team="'.$teamID.'">Zaproś</button>';
@@ -165,13 +165,13 @@ try {
                     // Lider na środku
                     if ($leader) {
                         echo '<div class="player-card leader" data-id="'.$leader['id'].'">
-                            <img src="'.($leader['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                            <img src="'.($leader['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                             <h3>'.$leader['username'].'</h3>
                             <p>Lider</p>
                         </div>';
                     } else {
                         echo '<div class="player-card leader empty">
-                            <img src="img/avatar_default.png" alt="">
+                            <img src="assets/img/avatar_default.png" alt="">
                             <h3>Puste miejsce</h3>
                             <p>Lider</p>
                         </div>';
@@ -181,7 +181,7 @@ try {
                     for ($i = 2; $i < 4; $i++) {
                         if (isset($users[$i])) {
                             echo '<div class="player-card" data-id="'.$users[$i]['id'].'">
-                                <img src="'.($users[$i]['avatar_url'] ?? 'img/avatar_default.png').'" alt="">
+                                <img src="'.($users[$i]['avatar_url'] ?? 'assets/img/avatar_default.png').'" alt="">
                                 <h3>'.$users[$i]['username'].'</h3>';
                                 if ($isLeader && $isRegistrationOpen) {
                                 echo '<button class="action-btn kick-player" data-player-id="'.$users[$i]['id'].'" title="Wyrzuć gracza">
@@ -191,7 +191,7 @@ try {
                             echo '</div>';
                         } else {
                             echo '<div class="player-card empty">
-                                <img src="img/avatar_default.png" alt="">
+                                <img src="assets/img/avatar_default.png" alt="">
                                 <h3>Puste miejsce</h3>';
                             if ($isLeader) {
                                 echo '<button class="invite-btn" data-team="'.$teamID.'">Zaproś</button>';
@@ -289,7 +289,7 @@ try {
                     div.dataset.userid = player.id;
                     div.innerHTML = `
                         <div class="p-info">
-                            <img src="${player.avatar_url?player.avatar_url:'img/avatar_default.png'}" alt="${player.id}">
+                            <img src="${player.avatar_url?player.avatar_url:'assets/img/avatar_default.png'}" alt="${player.id}">
                             <p class="w-300 f-upper">${player.username}</p>
                         </div>
                         <button class="zapros">+</button>
@@ -417,7 +417,7 @@ try {
                         div.classList.add('player');
                         div.innerHTML = `
                             <div class="p-info">
-                                <img src="${player.avatar_url ? player.avatar_url : 'img/avatar_default.png'}" alt="">
+                                <img src="${player.avatar_url ? player.avatar_url : 'assets/img/avatar_default.png'}" alt="">
                                 <p class="w-300 f-upper">${player.username}</p>
                             </div>
                             <button class="zapros" data-id="${player.id}">+</button>
@@ -455,6 +455,6 @@ try {
 
         });
     </script>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

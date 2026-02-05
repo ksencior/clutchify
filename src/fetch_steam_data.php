@@ -32,3 +32,4 @@ if (!empty($data['response']['players'][0])) {
 } else {
     return;
 }
+

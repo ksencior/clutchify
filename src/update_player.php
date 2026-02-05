@@ -120,3 +120,4 @@ switch ($type) {
 header("Location: ../settings.php?success=true");
 exit();
 ?>
+

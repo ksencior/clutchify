@@ -10,3 +10,4 @@ if (!isset($_POST['mecz_id']) || !isset($_SESSION['id'])) {
 $meczId = (int)$_POST['mecz_id'];
 $userId = (int)$_SESSION['id'];
 
+

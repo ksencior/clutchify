@@ -14,12 +14,12 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZSN Champions III</title>
-    <link rel="stylesheet" href="style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <script src="src/notifications.js"></script>
-    <script src="src/chat.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/chat.js"></script>
     <script>
         function debounce(func, delay) {
             let timeout;
@@ -116,6 +116,6 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
             </div>
         </div>
     </div>
-    <script src="src/mobile-menu.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>

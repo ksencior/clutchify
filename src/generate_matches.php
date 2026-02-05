@@ -46,3 +46,4 @@ try {
 } catch (PDOException $e) {
     echo "Błąd: " . $e->getMessage();
 }
+
