@@ -2,3 +2,6 @@
   Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
 </FilesMatch>
 Require all granted
+<FilesMatch "^\.env">
+  Require all denied
+</FilesMatch>
