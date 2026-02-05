@@ -100,55 +100,55 @@ if (isset($userid) && $userid!=NULL) {
                             if (empty($steamApiKey)) {
                                 echo '<p class="brak-danych">Brak klucza Steam API.</p>';
                             } else {
-                            $steamUrl = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?appid=730&key={$steamApiKey}&steamid={$steamId}";
+                                $steamUrl = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?appid=730&key={$steamApiKey}&steamid={$steamId}";
 
-                            $ch = curl_init();
-                            curl_setopt($ch, CURLOPT_URL, $steamUrl);
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                            curl_setopt($ch, CURLOPT_TIMEOUT, 6);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-                            $resp = curl_exec($ch);
-                            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                            $curlErr = curl_error($ch);
-                            curl_close($ch);
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, $steamUrl);
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+                                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+                                $resp = curl_exec($ch);
+                                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                                $curlErr = curl_error($ch);
+                                curl_close($ch);
 
-                            if ($resp !== false && $httpCode === 200) {
-                                $data = json_decode($resp, true);
-                                if (isset($data['playerstats']['stats']) && is_array($data['playerstats']['stats'])) {
-                                    $map = [];
-                                    foreach ($data['playerstats']['stats'] as $s) {
-                                        if (isset($s['name'])) $map[$s['name']] = isset($s['value']) ? $s['value'] : 0;
+                                if ($resp !== false && $httpCode === 200) {
+                                    $data = json_decode($resp, true);
+                                    if (isset($data['playerstats']['stats']) && is_array($data['playerstats']['stats'])) {
+                                        $map = [];
+                                        foreach ($data['playerstats']['stats'] as $s) {
+                                            if (isset($s['name'])) $map[$s['name']] = isset($s['value']) ? $s['value'] : 0;
+                                        }
+
+                                        // typowe nazwy statystyk CS:GO - dopasuj w zależności od tego, co zwraca API dla Twoich graczy
+                                        if (isset($map['total_kills'])) {
+                                            $staty['kills'] = (int)$map['total_kills'];
+                                        } elseif (isset($map['kills'])) {
+                                            $staty['kills'] = (int)$map['kills'];
+                                        }
+
+                                        if (isset($map['total_deaths'])) {
+                                            $staty['deaths'] = (int)$map['total_deaths'];
+                                        } elseif (isset($map['deaths'])) {
+                                            $staty['deaths'] = (int)$map['deaths'];
+                                        }
+
+                                        if (isset($map['total_kills_headshot'])) {
+                                            $headshots = (int)$map['total_kills_headshot'];
+                                            $staty['headshot_pct'] = ($staty['kills'] > 0) ? round(($headshots / $staty['kills']) * 100, 2) : 0;
+                                        }
+                                        $kd = ($staty['deaths'] > 0) ? round($staty['kills'] / $staty['deaths'], 2) : $staty['kills'];
+                                        echo '    <p><i class="fa-solid fa-crosshairs"></i>  '.htmlspecialchars($staty['kills']). '</p>';
+                                        echo '    <p><i class="fa-solid fa-skull-crossbones"></i> '.htmlspecialchars($staty['deaths']).'</p>';
+                                        echo '    <p><i class="fa-solid fa-bullseye"></i>  '.htmlspecialchars($staty['headshot_pct']).'%</p>';
+                                        echo '    <p><i class="fa-solid fa-arrow-trend-up"></i>  '.$kd.'</p>';
                                     }
-
-                                    // typowe nazwy statystyk CS:GO - dopasuj w zależności od tego, co zwraca API dla Twoich graczy
-                                    if (isset($map['total_kills'])) {
-                                        $staty['kills'] = (int)$map['total_kills'];
-                                    } elseif (isset($map['kills'])) {
-                                        $staty['kills'] = (int)$map['kills'];
-                                    }
-
-                                    if (isset($map['total_deaths'])) {
-                                        $staty['deaths'] = (int)$map['total_deaths'];
-                                    } elseif (isset($map['deaths'])) {
-                                        $staty['deaths'] = (int)$map['deaths'];
-                                    }
-
-                                    if (isset($map['total_kills_headshot'])) {
-                                        $headshots = (int)$map['total_kills_headshot'];
-                                        $staty['headshot_pct'] = ($staty['kills'] > 0) ? round(($headshots / $staty['kills']) * 100, 2) : 0;
-                                    }
-                                    $kd = ($staty['deaths'] > 0) ? round($staty['kills'] / $staty['deaths'], 2) : $staty['kills'];
-                                    echo '    <p><i class="fa-solid fa-crosshairs"></i>  '.htmlspecialchars($staty['kills']). '</p>';
-                                    echo '    <p><i class="fa-solid fa-skull-crossbones"></i> '.htmlspecialchars($staty['deaths']).'</p>';
-                                    echo '    <p><i class="fa-solid fa-bullseye"></i>  '.htmlspecialchars($staty['headshot_pct']).'%</p>';
-                                    echo '    <p><i class="fa-solid fa-arrow-trend-up"></i>  '.$kd.'</p>';
+                                } else {
+                                    // opcjonalnie: loguj $curlErr lub $resp jeśli potrzebne
                                 }
-                            } else {
-                                // opcjonalnie: loguj $curlErr lub $resp jeśli potrzebne
                             }
                         } else {
                             echo "<div class='brak-danych'><h3>No patrz, pusto tu..</h3><br><h4>Użytkownik nie połączył konta z kontem steam.</h4></div>";
-                            }
                         }
                     ?>
             </div>
