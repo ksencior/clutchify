@@ -7,61 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInitdeb9e9f6678e021403df7b835220d84d
 {
     public static $prefixLengthsPsr4 = array (
-        'W' => 
-        array (
-            'WebSocket\\' => 10,
-        ),
         'T' => 
         array (
             'Thedudeguy\\' => 11,
         ),
-        'P' => 
-        array (
-            'Psr\\Log\\' => 8,
-            'Psr\\Http\\Message\\' => 17,
-            'Phrity\\Util\\' => 12,
-            'Phrity\\Net\\' => 11,
-        ),
-        'G' => 
-        array (
-            'Google\\Protobuf\\' => 16,
-            'GPBMetadata\\Google\\Protobuf\\' => 28,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WebSocket\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/textalk/websocket/lib',
-        ),
         'Thedudeguy\\' => 
         array (
             0 => __DIR__ . '/..' . '/thedudeguy/rcon/src',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/src',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'Phrity\\Util\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phrity/util-errorhandler/src',
-        ),
-        'Phrity\\Net\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phrity/net-uri/src',
-        ),
-        'Google\\Protobuf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/protobuf/src/Google/Protobuf',
-        ),
-        'GPBMetadata\\Google\\Protobuf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf',
         ),
     );
 

@@ -6,12 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WebSocket\\' => array($vendorDir . '/textalk/websocket/lib'),
     'Thedudeguy\\' => array($vendorDir . '/thedudeguy/rcon/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
-    'Phrity\\Util\\' => array($vendorDir . '/phrity/util-errorhandler/src'),
-    'Phrity\\Net\\' => array($vendorDir . '/phrity/net-uri/src'),
-    'Google\\Protobuf\\' => array($vendorDir . '/google/protobuf/src/Google/Protobuf'),
-    'GPBMetadata\\Google\\Protobuf\\' => array($vendorDir . '/google/protobuf/src/GPBMetadata/Google/Protobuf'),
 );
