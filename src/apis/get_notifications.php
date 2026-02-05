@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 header('Content-Type: application/json');
@@ -20,5 +19,9 @@ $update = $pdo->prepare("UPDATE notifications SET seen = 1 WHERE user_id = :uid 
 $update->execute([':uid' => $_SESSION['id']]);
 
 echo json_encode($notifications);
+
+
+
+
 
 

@@ -6,6 +6,35 @@ $password = '';
 
 require_once __DIR__ . '/Config.php';
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+if (!function_exists('base_url')) {
+    function base_url(string $path = ''): string {
+        $base = Config::get('base_url', '/clutchify');
+        $base = trim($base);
+        if ($base === '' || $base === '/') {
+            $base = '';
+        } else {
+            $base = '/' . trim($base, '/');
+        }
+
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return $base !== '' ? $base : '/';
+        }
+        return $base . '/' . $path;
+    }
+}
+
+if (!function_exists('redirect_to')) {
+    function redirect_to(string $path): void {
+        header('Location: ' . base_url($path));
+        exit;
+    }
+}
+
 try {
     $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
     $options = [
@@ -21,3 +50,7 @@ try {
 } catch (PDOException $e) {
     die('Błąd połączenia: ' . $e->getMessage());
 }
+
+
+
+

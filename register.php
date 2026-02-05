@@ -1,9 +1,8 @@
 <?php 
-session_start();
 include_once 'src/core/connect_db.php';
 
 if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-    header('Location: index.php');
+    redirect_to('index.php');
     exit;
 }
 $error = NULL;
@@ -43,11 +42,12 @@ switch($error) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarejestruj się</title>
+    <title>Zarejestruj sie | <?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?></title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/clutchify-w-o-text.png" type="image/x-icon">
+<?php include 'src/views/partials/head.php'; ?>
 </head>
 <body>
     <div id="root" class="root-login">
@@ -75,7 +75,7 @@ switch($error) {
                 <p style="font-size: 0.85em; color: #555; width: 70%; margin: auto;">
                     <i class="fa-solid fa-circle-info"></i>
                     Twoje hasło jest zaszyfrowane i bezpieczne. Nikt, nawet administratorzy serwisu, nie mają do niego dostępu. 
-                    Więcej informacji znajdziesz <a href="policy.html" target="_blank">w polityce prywatności</a>.
+                    Więcej informacji znajdziesz <a href="policy.php" target="_blank">w polityce prywatności</a>.
                 </p>
                 <input type="password" name="password" id="password" required>
                 <label for="password">Powtórz hasło</label>
@@ -94,5 +94,13 @@ switch($error) {
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 

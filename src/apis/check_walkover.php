@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_POST['mecz_id']) || !isset($_SESSION['id'])) {
@@ -9,6 +8,10 @@ if (!isset($_POST['mecz_id']) || !isset($_SESSION['id'])) {
 
 $meczId = (int)$_POST['mecz_id'];
 $userId = (int)$_SESSION['id'];
+
+
+
+
 
 
 

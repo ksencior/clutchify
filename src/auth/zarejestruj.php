@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,27 +8,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password2 = $_POST['password2'] ?? '';
 
     if ($nickname === '' || $email === '' || $password === '' || $password2 === '') {
-        header('Location: /clutchify/register.php?err=no-inputs');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 
     if (strlen($password) < 3) {
-        header('Location: /clutchify/register.php?err=bad-password');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 
     if (strlen($nickname) < 3) {
-        header('Location: /clutchify/register.php?err=bad-username');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@zsngasawa.pl')) {
-        header('Location: /clutchify/register.php?err=email-not-valid');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 
     if ($password !== $password2) {
-        header('Location: /clutchify/register.php?err=passwords-no-match');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 
@@ -38,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email OR username = :nickname");
         $stmt->execute(['email' => $email, 'nickname' => $nickname]);
         if ($stmt->fetchColumn() > 0) {
-            header('Location: /clutchify/register.php?err=user-exists');
+            redirect_to('register.php?err=no-inputs');
             exit;
         }
 
@@ -53,13 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'hash' => $hash
         ]);
 
-        header('Location: /clutchify/login.php?registered=true');
+        redirect_to('register.php?err=no-inputs');
         exit;
     } catch (PDOException $e) {
-        header('Location: /clutchify/register.php?err=server');
+        redirect_to('register.php?err=no-inputs');
         exit;
     }
 }
 ?>
+
+
+
+
+
+
 
 

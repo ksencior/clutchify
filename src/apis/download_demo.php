@@ -1,7 +1,7 @@
 <?php
-session_start();
+require_once __DIR__ . '/../core/connect_db.php';
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header("Location: /clutchify/login.php");
+    redirect_to('login.php');
     exit;
 }
 
@@ -12,7 +12,7 @@ if (empty($_GET['id'])) {
 }
 
 $matchId = (int)$_GET['id'];
-$filePath = __DIR__ . "/../demos/match_{$matchId}_demos.tar";
+$filePath = __DIR__ . "/../../demos/match_{$matchId}_demos.tar";
 
 if (!file_exists($filePath)) {
     http_response_code(404);
@@ -31,5 +31,11 @@ header('Content-Length: ' . filesize($filePath));
 
 readfile($filePath);
 exit;
+
+
+
+
+
+
 
 

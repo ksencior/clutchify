@@ -1,8 +1,17 @@
 <?php
 require_once __DIR__ . '/../core/connect_db.php';
 
+if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
+    echo json_encode(["success" => false, "error" => "Unauthorized"]);
+    exit;
+}
+
 try {
-    $lobbyId = (int)$_GET['lobby_id'];
+    $lobbyId = (int)($_GET['lobby_id'] ?? 0);
+    if ($lobbyId <= 0) {
+        echo json_encode(["success" => false, "error" => "Invalid lobby"]);
+        exit;
+    }
 $q = $pdo->prepare("SELECT * FROM games WHERE lobby_id = ? AND status IN ('waiting', 'playing') ORDER BY id DESC LIMIT 1");
 $q->execute([$lobbyId]);
 $game = $q->fetch();
@@ -93,4 +102,8 @@ echo json_encode([
     echo json_encode(["success" => false, "error" => $e->getMessage()]);
     exit;
 }
+
+
+
+
 

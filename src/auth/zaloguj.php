@@ -1,8 +1,7 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-    header('Location: /clutchify/index.php');
+    redirect_to('index.php');
     exit;
 }
 
@@ -30,20 +29,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'], $_POST['passwo
 
             if (isset($user['steam_id']) && $user['steam_id'] != null) {
                 require_once __DIR__ . '/fetch_steam_data.php';
-            } else {
-                header('Location: /clutchify/index.php');
             }
+            redirect_to('index.php');
             exit();
         } else {
             $err = "Niepoprawny e-mail lub/i haslo!";
-            header('Location: /clutchify/login.php?err=' . ( !$user ? 'email' : 'password' ) );
+            redirect_to('login.php?err=' . ( !$user ? 'email' : 'password' ));
             exit();
         }
     } catch (PDOException $e) {
         $err = "Wystąpił błąd: " . $e->getMessage();
-        header('Location: /clutchify/login.php?err=server');
+        redirect_to('index.php');
         exit();
     }
 }
 ?>
+
+
+
+
+
+
 

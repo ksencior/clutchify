@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../core/connect_db.php';
 
-$apiKey = ''; // <<< ZMIEŃ TO
+$apiKey = Config::get('steam_api_key', '');
 $steamid = $_SESSION['steam_id'] ?? NULL;
 $url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={$apiKey}&steamids={$steamid}";
 
@@ -19,7 +19,6 @@ if (empty($apiKey)) {
             ':id' => $_SESSION['id']
         ]);
         $_SESSION['avatar_url'] = $defaultAvatar;
-        header("Location: /clutchify/index.php");
     } catch (PDOException $e) {
         echo $e; exit;
     }
@@ -41,12 +40,14 @@ if (!empty($data['response']['players'][0])) {
         ]);
 
         $_SESSION['avatar_url'] = $avatar;
-        header("Location: /clutchify/index.php");
     } catch (PDOException $e) {
         echo $e; exit;
     }
 } else {
     return;
 }
+
+
+
 
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_SESSION['id']) || !isset($_GET['mecz_id'])) {
@@ -72,5 +71,9 @@ echo json_encode([
     'lobby_id' => $lobbyId,
     'is_started' => $isStarted
 ]);
+
+
+
+
 
 

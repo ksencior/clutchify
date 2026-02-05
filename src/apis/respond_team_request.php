@@ -1,5 +1,4 @@
 <?php
-session_start();
 header('Content-Type: application/json');
 require_once __DIR__ . '/../core/connect_db.php';
 
@@ -90,5 +89,9 @@ try {
     http_response_code(500);
     echo json_encode(["success" => false, "message" => "Błąd serwera", "details" => $e->getMessage()]);
 }
+
+
+
+
 
 

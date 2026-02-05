@@ -1,9 +1,9 @@
 <?php 
-session_start();
 include_once 'src/core/connect_db.php';
 $userid = 0;
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header('Location: login.php');
+    redirect_to('login.php');
+    exit;
 }
 
 if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -46,7 +46,8 @@ if (isset($userid) && $userid!=NULL) {
                 }
             }
         } else {
-            header('Location: profile.php?id='.$_SESSION['team_id']);
+            redirect_to('profile.php?id='.$_SESSION['id']);
+            exit;
         }
 
     } catch (PDOException $e) {
@@ -60,14 +61,15 @@ if (isset($userid) && $userid!=NULL) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZSN Champions III</title>
+    <title>Profil | <?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?></title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/clutchify-w-o-text.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
     <script src="assets/js/notifications.js?v=<?= time() ?>"></script>
     <script src="assets/js/chat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<?php include 'src/views/partials/head.php'; ?>
 </head>
 <body>
     <div id="root">
@@ -94,14 +96,17 @@ if (isset($userid) && $userid!=NULL) {
                     <h2>Statystyki CS2</h2>
                     <?php 
                         if (!empty($steamId)) {
-                            $steamApiKey = 'BFC26691AF66E80C9DE91E0B6CDAD4AD';
+                            $steamApiKey = Config::get('steam_api_key', '');
+                            if (empty($steamApiKey)) {
+                                echo '<p class="brak-danych">Brak klucza Steam API.</p>';
+                            } else {
                             $steamUrl = "https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?appid=730&key={$steamApiKey}&steamid={$steamId}";
 
                             $ch = curl_init();
                             curl_setopt($ch, CURLOPT_URL, $steamUrl);
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             curl_setopt($ch, CURLOPT_TIMEOUT, 6);
-                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
                             $resp = curl_exec($ch);
                             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                             $curlErr = curl_error($ch);
@@ -143,6 +148,7 @@ if (isset($userid) && $userid!=NULL) {
                             }
                         } else {
                             echo "<div class='brak-danych'><h3>No patrz, pusto tu..</h3><br><h4>Użytkownik nie połączył konta z kontem steam.</h4></div>";
+                            }
                         }
                     ?>
             </div>
@@ -345,4 +351,12 @@ if (isset($userid) && $userid!=NULL) {
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 

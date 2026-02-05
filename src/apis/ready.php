@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_POST['mecz_id']) || !isset($_SESSION['id'])) {
@@ -54,6 +53,10 @@ echo json_encode([
     'ready_count_all'  => (int)$counts['ready_count_all'],
     'ready_count_team' => (int)$counts['ready_count_team']
 ]);
+
+
+
+
 
 
 

@@ -41,3 +41,6 @@ try {
     // echo "Błąd CRONa: " . $e->getMessage();
 }
 
+
+
+

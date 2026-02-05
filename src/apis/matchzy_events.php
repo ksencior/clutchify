@@ -216,14 +216,15 @@ try {
                 ->execute([$gameId]);
 
             // Tylko jeśli seria NIE jest zakończona - utwórz następną grę
+            $serverIp = Config::get('server_ip', '51.83.175.128:25471');
             if (!$seriesFinished) {
                 $nextMapNum = $currentMapNum + 1;
                 $nextMap = $maps[$nextMapNum] ?? null;
                 
                 if ($nextMap) {
                     $pdo->prepare("INSERT INTO games (lobby_id, match_id, team1, team2, server_ip, current_map, status, server_ready_until) 
-                        VALUES (?, ?, ?, ?, '37.221.94.158:27015', ?, 'waiting', DATE_ADD(NOW(), INTERVAL 5 MINUTE))")
-                        ->execute([$lobbyID, $matchId, $teamy['team1'], $teamy['team2'], $nextMap]);
+                        VALUES (?, ?, ?, ?, ?, ?, 'waiting', DATE_ADD(NOW(), INTERVAL 5 MINUTE))")
+                        ->execute([$lobbyID, $matchId, $teamy['team1'], $teamy['team2'], $serverIp, $nextMap]);
 
                     $nextGameId = $pdo->lastInsertId();  // Pobierz ID nowej gry
                     $stmt = $pdo->prepare("
@@ -351,7 +352,14 @@ try {
                 $pdo->prepare("TRUNCATE TABLE games_maps")->execute();
                 $pdo->prepare("TRUNCATE TABLE lobbies")->execute();
                 $pdo->prepare("TRUNCATE TABLE map_veto")->execute();
-                
+
+                $winnerTeamName = null;
+                if (isset($winnerID)) {
+                    $stmt = $pdo->prepare("SELECT nazwa FROM teams WHERE id = ?");
+                    $stmt->execute([$winnerID]);
+                    $winnerTeamName = $stmt->fetchColumn();
+                }
+                $winnerTeamName = $winnerTeamName ?: 'unknown';
                 logEvent("🏁 Series ended for match $matchId — winner: $winnerTeamName");
             }
             break;
@@ -373,4 +381,7 @@ try {
     http_response_code(500);
     echo json_encode(["error" => "Server error"]);
 }
+
+
+
 

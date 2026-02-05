@@ -1,8 +1,14 @@
 <?php
-session_start();
+require_once __DIR__ . '/../core/connect_db.php';
 session_unset(); // Usunięcie wszystkich zmiennych sesji
 session_destroy(); // Zniszczenie sesji
-header('Location: /clutchify/index.php'); // Przekierowanie do strony logowania
+redirect_to('index.php'); // Przekierowanie do strony logowania
 exit;
 ?>
+
+
+
+
+
+
 

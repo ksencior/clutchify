@@ -1,5 +1,4 @@
 <?php
-session_start();
 header('Content-Type: application/json; charset=utf-8');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -33,6 +32,7 @@ require_once __DIR__ . '/../services/rcon_connect.php';
 try {
     // transakcja by uniknąć race-condition
     $pdo->beginTransaction();
+    $serverIp = Config::get('server_ip', '51.83.175.128:25471');
 
     // pobierz aktualny stage i zablokuj wiersz
     $stmt = $pdo->prepare("SELECT current_stage FROM lobbies WHERE id = :lid FOR UPDATE");
@@ -121,8 +121,8 @@ try {
         }
         if (isset($matchID, $team1, $team2)) {
             $stmt = $pdo->prepare("INSERT INTO games (lobby_id, match_id, team1, team2, server_ip, current_map, current_round, server_ready_until) 
-            VALUES (:lid, :mid, :t1, :t2, '51.83.175.128:25471', :map, 0, DATE_ADD(NOW(), INTERVAL 5 MINUTE))");
-            $stmt->execute([':lid' => $lobbyId, ':mid' => $matchID, ':t1' => $team1, ':t2' => $team2, ':map' => $map]);
+            VALUES (:lid, :mid, :t1, :t2, :server_ip, :map, 0, DATE_ADD(NOW(), INTERVAL 5 MINUTE))");
+            $stmt->execute([':lid' => $lobbyId, ':mid' => $matchID, ':t1' => $team1, ':t2' => $team2, ':server_ip' => $serverIp, ':map' => $map]);
             $stmt = $pdo->prepare("SELECT u.id, u.team_id, u.steam_id FROM users u JOIN teams t1 ON u.team_id = t1.id WHERE t1.id = :t1 
             UNION SELECT u.id, u.team_id, u.steam_id FROM users u JOIN teams t2 ON u.team_id = t2.id WHERE t2.id = :t2");
             $stmt->execute([':t1' => $team1, ':t2' => $team2]);
@@ -214,7 +214,7 @@ try {
             // zapakuj do JSON
             $json = json_encode($MatchZyMatch, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             file_put_contents(__DIR__ . "/../storage/tmp/matchzy_config.json", $json);
-            prepareMatch($team1name, $team2name, $map);
+            prepareMatch($map);
         }
     }
 
@@ -227,6 +227,10 @@ try {
     echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     exit;
 }
+
+
+
+
 
 
 

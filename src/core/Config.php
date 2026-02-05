@@ -6,6 +6,12 @@ class Config {
     public static function init($pdo) {
         if (self::$instance === null) {
             try {
+                $pdo->exec("
+                    CREATE TABLE IF NOT EXISTS system_settings (
+                        setting_key VARCHAR(64) NOT NULL PRIMARY KEY,
+                        setting_value TEXT NOT NULL
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                ");
                 $stmt = $pdo->query("SELECT setting_key, setting_value FROM system_settings");
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     self::$settings[$row['setting_key']] = $row['setting_value'];
@@ -21,3 +27,6 @@ class Config {
         return self::$settings[$key] ?? $default;
     }
 }
+
+
+

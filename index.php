@@ -1,9 +1,9 @@
 <?php 
-session_start();
 include_once 'src/core/connect_db.php';
 //include_once 'src/auth/fetch_steam_data.php';
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header('Location: login.php');
+    redirect_to('login.php');
+    exit;
 }
 
 $matchLive = false;
@@ -28,32 +28,33 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= Config::get('app_name', 'ZSN Champions III') ?></title>
+    <title>Strona Główna | <?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?></title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/clutchify-w-o-text.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
     <script src="assets/js/notifications.js?v=<?= time() ?>"></script>
     <script src="assets/js/chat.js"></script>
     <!-- Primary Meta Tags -->
-    <meta name="title" content="ZSN CHAMPIONS III" />
-    <meta name="description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
+    <meta name="title" content="<?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?>" />
+    <meta name="description" content="Clutchify.gg - platforma do organizacji turniejow CS2, zarzadzania meczami i statystykami." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://zsnturniej.0bg.pl/" />
-    <meta property="og:title" content="ZSN CHAMPIONS III" />
-    <meta property="og:description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
-    <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
+    <meta property="og:url" content="<?= htmlspecialchars(Config::get('base_url', '/clutchify')) ?>/" />
+    <meta property="og:title" content="<?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?>" />
+    <meta property="og:description" content="Clutchify.gg - platforma do organizacji turniejow CS2, zarzadzania meczami i statystykami." />
+    <meta property="og:image" content="assets/img/promo_poster.png" />
 
     <!-- X (Twitter) -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://zsnturniej.0bg.pl/" />
-    <meta property="twitter:title" content="ZSN CHAMPIONS III" />
-    <meta property="twitter:description" content="Turniej CS2 dla Zespołu Szkół Niepublicznych w Gąsawie" />
-    <meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
+    <meta property="twitter:url" content="<?= htmlspecialchars(Config::get('base_url', '/clutchify')) ?>/" />
+    <meta property="twitter:title" content="<?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?>" />
+    <meta property="twitter:description" content="Clutchify.gg - platforma do organizacji turniejow CS2, zarzadzania meczami i statystykami." />
+    <meta property="twitter:image" content="assets/img/promo_poster.png" />
 
     <!-- Meta Tags Generated with https://metatags.io -->
+<?php include 'src/views/partials/head.php'; ?>
 </head>
 <body>
     <div id="root">
@@ -72,7 +73,7 @@ try {
                     new Twitch.Embed("twitch-embed", {
                         width: "100%",
                         height: "100%",
-                        channel: "zsn_gasawa",
+                        channel: "<?= htmlspecialchars(Config::get('twitch_channel', 'zsn_gasawa')) ?>",
                         autoplay: true,
                         layout: "video",
                         muted: false
@@ -183,4 +184,13 @@ try {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 

@@ -1,9 +1,11 @@
 <?php
-session_start();
 require_once __DIR__ . '/steam/openid.php';
 require_once __DIR__ . '/../core/connect_db.php';
 
-$openid = new LightOpenID('localhost/clutchify');
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$realm = $scheme . '://' . $host . base_url('');
+$openid = new LightOpenID($realm);
 
 if (!$openid->mode) {
     // Rozpocznij autoryzację przez Steam
@@ -28,7 +30,7 @@ if (!$openid->mode) {
     
         $_SESSION['steam_id'] = $steamid64;
         include_once __DIR__ . '/fetch_steam_data.php';
-        header('Location: /clutchify/index.php');
+        redirect_to('index.php');
         exit;
     } else {
         die("Nie udało się odczytać steamID.");
@@ -36,5 +38,11 @@ if (!$openid->mode) {
 } else {
     echo "Błąd logowania przez Steam.";
 }
+
+
+
+
+
+
 
 

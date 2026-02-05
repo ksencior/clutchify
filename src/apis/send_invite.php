@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if(!isset($_SESSION['id']) || !isset($_POST['to_user']) || !isset($_POST['team_id'])) {
@@ -56,5 +55,9 @@ try {
     echo $e->getMessage();
 }
 ?>
+
+
+
+
 
 

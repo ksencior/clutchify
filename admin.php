@@ -1,9 +1,8 @@
 <?php 
-session_start();
 include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != true) {
-    header('Location: index.php');
+    redirect_to('index.php');
     exit;
 }
 ?>
@@ -12,7 +11,8 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administratora | <?= htmlspecialchars(Config::get('app_name', 'ZSN Champions')) ?></title>
+    <title>Panel Administratora | <?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?></title>
+    <link rel="shortcut icon" href="assets/img/clutchify-w-o-text.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
     <style>
         :root {
@@ -51,6 +51,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
         .btn-save:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--primary-glow); }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+<?php include 'src/views/partials/head.php'; ?>
 </head>
 <body>
     <div id="root">
@@ -81,19 +82,48 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
             </div>
 
             <div id="settings" class="tab-content active">
+                <?php if (isset($_GET['settings']) && $_GET['settings'] === 'ok'): ?>
+                    <p style="color: #66ff99; margin-bottom: 10px;">Zapisano ustawienia.</p>
+                <?php elseif (isset($_GET['settings']) && $_GET['settings'] === 'error'): ?>
+                    <p style="color: #ff6666; margin-bottom: 10px;">Nie udaĹ‚o siÄ™ zapisaÄ‡ ustawieĹ„.</p>
+                <?php endif; ?>
                 <form class="settings-form" action="src/apis/update_system_settings.php" method="POST">
                     <div class="admin-grid" style="grid-template-columns: 1fr 1fr;">
                         <div class="form-group">
                             <label>Nazwa Platformy (Branding)</label>
-                            <input type="text" name="app_name" value="<?= htmlspecialchars(Config::get('app_name', 'ZSN Champions')) ?>">
+                            <input type="text" name="app_name" value="<?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?>">
                         </div>
                         <div class="form-group">
                             <label>Kolor Przewodni</label>
                             <input type="color" name="primary_color" value="<?= htmlspecialchars(Config::get('primary_color', '#a268ff')) ?>" style="height: 45px;">
                         </div>
                         <div class="form-group">
+                            <label>Base URL aplikacji</label>
+                            <input type="text" name="base_url" value="<?= htmlspecialchars(Config::get('base_url', '/clutchify')) ?>" placeholder="/clutchify">
+                        </div>
+                        <div class="form-group">
+                            <label>Kanał Twitch</label>
+                            <input type="text" name="twitch_channel" value="<?= htmlspecialchars(Config::get('twitch_channel', 'zsn_gasawa')) ?>" placeholder="np. zsn_gasawa">
+                        </div>
+                        <div class="form-group">
+                            <label>Domyślny serwer gry (IP:PORT)</label>
+                            <input type="text" name="server_ip" value="<?= htmlspecialchars(Config::get('server_ip', '51.83.175.128:25471')) ?>" placeholder="np. 127.0.0.1:27015">
+                        </div>
+                        <div class="form-group">
                             <label>Serwer RCON (Host)</label>
                             <input type="text" name="rcon_host" value="<?= htmlspecialchars(Config::get('rcon_host', '')) ?>" placeholder="np. 127.0.0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>RCON Port</label>
+                            <input type="number" name="rcon_port" value="<?= htmlspecialchars(Config::get('rcon_port', '25471')) ?>" placeholder="np. 25471">
+                        </div>
+                        <div class="form-group">
+                            <label>RCON Hasło</label>
+                            <input type="password" name="rcon_password" value="<?= htmlspecialchars(Config::get('rcon_password', '')) ?>" placeholder="***">
+                        </div>
+                        <div class="form-group">
+                            <label>Steam API Key</label>
+                            <input type="password" name="steam_api_key" value="<?= htmlspecialchars(Config::get('steam_api_key', '')) ?>" placeholder="key">
                         </div>
                         <div class="form-group">
                             <label>System Veto</label>
@@ -172,4 +202,12 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 

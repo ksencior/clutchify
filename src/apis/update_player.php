@@ -1,9 +1,8 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header('Location: /clutchify/login.php');
+    redirect_to('login.php');
     exit();
 }
 
@@ -11,7 +10,7 @@ $userId = $_SESSION['id'];
 $type = $_GET['type'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: /clutchify/settings.php");
+    redirect_to('login.php');
     exit();
 }
 
@@ -35,12 +34,12 @@ switch ($type) {
         $password = $_POST['password'];
 
         if ($_SESSION['email'] != $user['email']) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-email");
+            redirect_to('login.php');
             exit;
         }
 
         if (!verifyPassword($password, $user['password_hash'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-password");
+            redirect_to('login.php');
             exit;
         }
 
@@ -54,12 +53,12 @@ switch ($type) {
         $confirm = $_POST['confirmpassword'];
 
         if ($new !== $confirm) {
-            header("Location: /clutchify/settings.php?success=false&err=passwords-dont-match");
+            redirect_to('login.php');
             exit;
         }
 
         if (!verifyPassword($current, $user['password_hash'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-password");
+            redirect_to('login.php');
             exit;
         }
 
@@ -73,7 +72,7 @@ switch ($type) {
         $password = $_POST['password'];
 
         if (!verifyPassword($password, $user['password_hash'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-password");
+            redirect_to('login.php');
             exit;
         }
 
@@ -86,12 +85,12 @@ switch ($type) {
         $password = $_POST['password'];
 
         if (!in_array($plec, ['m', 'k'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-sex");
+            redirect_to('login.php');
             exit;
         }
 
         if (!verifyPassword($password, $user['password_hash'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-password");
+            redirect_to('login.php');
             exit;
         }
 
@@ -104,7 +103,7 @@ switch ($type) {
         $password = $_POST['password'];
 
         if (!verifyPassword($password, $user['password_hash'])) {
-            header("Location: /clutchify/settings.php?success=false&err=wrong-password");
+            redirect_to('login.php');
             exit;
         }
 
@@ -117,8 +116,14 @@ switch ($type) {
 }
 
 // Po zakończeniu – przekieruj użytkownika z powrotem
-header("Location: /clutchify/settings.php?success=true");
+redirect_to('login.php');
 exit();
 ?>
+
+
+
+
+
+
 
 

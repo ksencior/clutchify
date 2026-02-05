@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 header('Content-Type: application/json');
@@ -19,5 +18,9 @@ try {
     http_response_code(500);
     echo json_encode([]);
 }
+
+
+
+
 
 

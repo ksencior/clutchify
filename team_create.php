@@ -1,14 +1,13 @@
 <?php 
-session_start();
 include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
-    header('Location: login.php');
+    redirect_to('login.php');
     exit;
 }
 
 if (!empty($_SESSION['team_id'])) {
-    header('Location: index.php');
+    redirect_to('login.php');
     exit;
 }
 $zapisy = false;
@@ -55,9 +54,9 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZSN Champions III</title>
+    <title>Utwórz Drużynę | <?= htmlspecialchars(Config::get('app_name', 'Clutchify.gg')) ?></title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
-    <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/clutchify-w-o-text.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <script src="https://kit.fontawesome.com/6fb5402435.js" crossorigin="anonymous"></script>
     <script src="assets/js/notifications.js?v=<?= time() ?>"></script>
@@ -68,6 +67,7 @@ try {
             cursor: not-allowed;
         }
     </style>
+<?php include 'src/views/partials/head.php'; ?>
 </head>
 <body>
     <div id="root">
@@ -131,4 +131,12 @@ try {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 header('Content-Type: application/json');
@@ -74,4 +73,8 @@ try {
 }
 
 ?>
+
+
+
+
 

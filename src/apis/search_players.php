@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -24,5 +23,9 @@ try {
     http_response_code(500);
     echo json_encode([]);
 }
+
+
+
+
 
 

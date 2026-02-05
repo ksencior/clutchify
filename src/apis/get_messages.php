@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -21,5 +20,9 @@ echo json_encode(array_reverse($messages));
 
 
 ?>
+
+
+
+
 
 

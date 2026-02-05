@@ -1,9 +1,11 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
-$host = '51.83.175.128'; // Server host name or IP
-$port = 25471;                      // Port rcon is listening on
-$password = 'zsnturniej'; // rcon.password setting set in server.properties
-$timeout = 3;                       // How long to timeout.
+require_once __DIR__ . '/../core/connect_db.php';
+
+$host = Config::get('rcon_host', '51.83.175.128'); // Server host name or IP
+$port = (int)Config::get('rcon_port', 25471);      // Port rcon is listening on
+$password = Config::get('rcon_password', 'zsnturniej'); // rcon.password setting set in server.properties
+$timeout = 3;                                       // How long to timeout.
 
 use Thedudeguy\Rcon;
 
@@ -14,4 +16,7 @@ if (!($rcon->connect()))
     echo 'Nie udało się połączyć z RCON.';
     die();
 }
+
+
+
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -24,4 +23,8 @@ $stmt->execute([':tid'=>$teamId, ':uid'=>$userId, ':msg'=>$message]);
 
 echo json_encode(['success' => true]);
 ?>
+
+
+
+
 
