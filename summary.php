@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 date_default_timezone_set("Europe/Warsaw");
 
 error_reporting(E_ALL);
@@ -108,7 +108,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="lobby-title">
                 <h1 class="glowing"><?= htmlspecialchars($match['team1_name']) ?></h1>
@@ -125,7 +125,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                     <br>
                     <div class="demo-download" style="text-align:center; margin-top:20px;">
                         <?php if ($demoArchiveExists): ?>
-                            <a href="src/download_demo.php?id=<?= $matchId ?>" class="btn" style="padding:10px 20px; background:#333; color:white; border-radius:10px; text-decoration:none;">
+                            <a href="src/apis/download_demo.php?id=<?= $matchId ?>" class="btn" style="padding:10px 20px; background:#333; color:white; border-radius:10px; text-decoration:none;">
                                 <i class="fa-solid fa-file-archive"></i> Pobierz demka (.tar)
                             </a>
                         <?php else: ?>
@@ -360,7 +360,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                 <?php endif; ?>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -413,3 +413,4 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

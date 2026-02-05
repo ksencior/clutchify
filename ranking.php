@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 $teamID = 0;
 $isLeader = false;
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -40,7 +40,7 @@ $best = $stmt->fetchAll();
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content ranking">
             <?php if (!$best): ?>
             <h1>No patrz, pusto tu..</h1>
@@ -78,7 +78,7 @@ $best = $stmt->fetchAll();
             </table>
             <?php endif; ?>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -94,3 +94,4 @@ $best = $stmt->fetchAll();
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

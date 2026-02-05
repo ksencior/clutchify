@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 date_default_timezone_set("Europe/Warsaw");
 
 error_reporting(E_ALL);
@@ -98,7 +98,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="lobby-title">
                 <h1 class="glowing"><?= htmlspecialchars($lobby['team1_name']) ?></h1>
@@ -189,7 +189,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                 </div>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -246,7 +246,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
 
         async function fetchVeto() {
             try {
-                const res = await fetch(`src/get_veto.php?lobby_id=${lobbyId}`);
+                const res = await fetch(`src/apis/get_veto.php?lobby_id=${lobbyId}`);
                 const data = await res.json();
                 if (!data.success && data.success !== undefined) {
                     console.error('get_veto error', data);
@@ -331,7 +331,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
 
                     if (stage.action === "decider" && availableMaps.length === 1) {
                         try {
-                            const res = await fetch("src/save_veto.php", {
+                            const res = await fetch("src/apis/save_veto.php", {
                                 method: "POST",
                                 headers: {"Content-Type": "application/x-www-form-urlencoded"},
                                 body: new URLSearchParams({
@@ -404,7 +404,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
 
         async function fetchGame() {
             try {
-                const res = await fetch(`src/get_game.php?lobby_id=${lobbyId}`);
+                const res = await fetch(`src/apis/get_game.php?lobby_id=${lobbyId}`);
                 const data = await res.json();
                 if (!data.success) {
                     console.error('get_game error', data);
@@ -451,7 +451,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                                 <span>${data.active_map_name}</span>
                             </div>`;
                     // fetch statsy
-                    fetch(`src/get_match_stats.php?lobby_id=${lobbyId}`)
+                    fetch(`src/apis/get_match_stats.php?lobby_id=${lobbyId}`)
                         .then(r => r.json())
                         .then(stats => {
                             if (!stats.success) {console.error(stats.error); return};
@@ -512,7 +512,7 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
                 if (!availableMaps.includes(map)) return;
 
                 try {
-                    const res = await fetch("src/save_veto.php", {
+                    const res = await fetch("src/apis/save_veto.php", {
                         method: "POST",
                         headers: {"Content-Type": "application/x-www-form-urlencoded"},
                         body: new URLSearchParams({
@@ -564,3 +564,4 @@ function renderPlayers($pdo, $teamId, $leaderId, $side) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

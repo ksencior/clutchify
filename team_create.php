@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
@@ -71,13 +71,13 @@ try {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content <?= $zapisy? '' : 'ranking' ?>">
             <?php if ($zapisy): ?>
             <div class="team-form">
                 <h1>Stwórz drużynę</h1>
                 <div id="countdown-timer"></div>
-                <form action="src/create_team.php" method="post">
+                <form action="src/apis/create_team.php" method="post">
                     <label for="nazwa">Nazwa drużyny</label>
                     <input type="text" name="nazwa" id="nazwa" maxlength="20" minlength="3" required>
                     <label for="skrot">Tag drużyny (np. MD16 dla MANDARYNKI SZESNASTE)</label>
@@ -115,7 +115,7 @@ try {
                 <h3>Zapisy jeszcze nie ruszyły.</h3>
             <?php endif;?>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -131,3 +131,4 @@ try {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 $teamID = 0;
 $isLeader = false;
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -104,7 +104,7 @@ try {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="team-info">
                 <h1><?php echo "$teamName" ?></h1>
@@ -207,7 +207,7 @@ try {
                 </div>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -245,7 +245,7 @@ try {
                 alert('Wystąpił błąd. Spróbuj ponownie później.');
                 return;
             }
-            fetch('src/send_invite.php', {
+            fetch('src/apis/send_invite.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `to_user=${toUserId}&team_id=${teamId}`
@@ -264,7 +264,7 @@ try {
             });
         }
         function fetchPlayers() {
-            fetch('src/get_players.php')
+            fetch('src/apis/get_players.php')
             .then(res => res.text())
             .then(text => {
                 let data;
@@ -342,7 +342,7 @@ try {
                     e.stopPropagation(); // Zapobiega przejściu do profilu
                     const playerId = btn.getAttribute('data-player-id');
                     if (confirm(`Czy na pewno chcesz wyrzucić tego gracza (ID: ${playerId}) z drużyny?`)) {
-                        fetch('src/kick_player.php', { // Będziesz musiał utworzyć ten plik!
+                        fetch('src/apis/kick_player.php', { // Będziesz musiał utworzyć ten plik!
                             method: 'POST',
                             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                             body: `player_id=${playerId}`
@@ -369,7 +369,7 @@ try {
             if (leaveTeamButton) {
                 leaveTeamButton.addEventListener('click', () => {
                     if (confirm('Czy na pewno chcesz opuścić drużynę? Nie będziesz mógł wrócić bez zaproszenia.')) {
-                        fetch('src/leave_team.php', { // Będziesz musiał utworzyć ten plik!
+                        fetch('src/apis/leave_team.php', { // Będziesz musiał utworzyć ten plik!
                             method: 'POST',
                             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                             // Nie potrzeba ciała, bo ID użytkownika jest w sesji
@@ -403,7 +403,7 @@ try {
 
                 playerList.innerHTML = '<div class="loader">Szukam graczy...</div>';
 
-                fetch('src/search_players.php?q=' + encodeURIComponent(query))
+                fetch('src/apis/search_players.php?q=' + encodeURIComponent(query))
                 .then(res => res.json())
                 .then(data => {
                     playerList.innerHTML = '';
@@ -428,7 +428,7 @@ try {
                     playerList.querySelectorAll('button.zapros').forEach(btn => {
                         btn.addEventListener('click', () => {
                             const playerId = btn.getAttribute('data-id');
-                            fetch('src/send_invite.php', {
+                            fetch('src/apis/send_invite.php', {
                                 method: 'POST',
                                 headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify({ player_id: playerId, team_id: <?php echo $teamID; ?> })
@@ -458,3 +458,4 @@ try {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

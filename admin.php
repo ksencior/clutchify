@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != true) {
     header('Location: index.php');
@@ -54,7 +54,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         
         <div class="content">
             <h1 class="f-upper ls-2" style="margin-bottom: 20px;">Panel Sterowania</h1>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
             </div>
 
             <div id="settings" class="tab-content active">
-                <form class="settings-form" action="src/update_system_settings.php" method="POST">
+                <form class="settings-form" action="src/apis/update_system_settings.php" method="POST">
                     <div class="admin-grid" style="grid-template-columns: 1fr 1fr;">
                         <div class="form-group">
                             <label>Nazwa Platformy (Branding)</label>
@@ -152,7 +152,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
 
         </div>
 
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
     </div>
 
     <script>
@@ -172,3 +172,4 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged'] || !isset($_SESSION['isA
     </script>
 </body>
 </html>
+

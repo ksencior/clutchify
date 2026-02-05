@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 date_default_timezone_set("Europe/Warsaw");
 $teamID = 0;
 $isLeader = false;
@@ -34,7 +34,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content" style="flex-direction: column; align-items: center; flex-wrap: nowrap;">
                 <h1>Mecze</h1>
                 <?php
@@ -107,7 +107,7 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
                 }
                 ?>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -138,3 +138,4 @@ if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

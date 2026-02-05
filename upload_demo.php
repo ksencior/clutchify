@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/src/connect_db.php";
-$logDir = __DIR__ . '/src/logs';
+require_once __DIR__ . "/src/core/connect_db.php";
+$logDir = __DIR__ . '/src/storage/logs';
 $logFile = $logDir . '/demos.log';
 // Upewnij się, że folder logs istnieje
 if (!is_dir($logDir)) {
@@ -133,3 +133,5 @@ if (file_put_contents($targetFile, $demoContent) !== false) {
     echo "Upload failed";
 }
 // Koniec
+
+

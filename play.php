@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 date_default_timezone_set("Europe/Warsaw");
 $isLeader = false;
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
@@ -119,7 +119,7 @@ if (isset($teamID) && $teamID!=NULL) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="team-info">
                 <h1 style="width: 100%; display: block; text-align: center;">Zagraj mecz</h1>
@@ -303,7 +303,7 @@ if (isset($teamID) && $teamID!=NULL) {
                 </div>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -342,7 +342,7 @@ if (isset($teamID) && $teamID!=NULL) {
 
             function updateStatus() {
                 if (!matchId || matchId == "NULL") return;
-                fetch('src/get_ready_status.php?mecz_id=' + matchId)
+                fetch('src/apis/get_ready_status.php?mecz_id=' + matchId)
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
@@ -361,7 +361,7 @@ if (isset($teamID) && $teamID!=NULL) {
                 btn.addEventListener('click', () => {
                 const matchId = btn.dataset.match;
                 if (matchId == "NULL") return;
-                fetch('src/ready.php', {
+                fetch('src/apis/ready.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: 'mecz_id=' + encodeURIComponent(matchId)
@@ -402,3 +402,4 @@ if (isset($teamID) && $teamID!=NULL) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 $userid = 0;
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
@@ -71,7 +71,7 @@ if (isset($userid) && $userid!=NULL) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="profile-info">
                 <img src="<?php echo (isset($avatar) && !empty($avatar)) ? $avatar : 'assets/img/avatar_default.png'; ?>" alt="Avatar uzytkownika" class="avatar">
@@ -228,7 +228,7 @@ if (isset($userid) && $userid!=NULL) {
                 <?php endif; ?>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -345,3 +345,4 @@ if (isset($userid) && $userid!=NULL) {
     </script>
 </body>
 </html>
+

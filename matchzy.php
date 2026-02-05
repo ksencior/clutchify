@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $lobbyID = 168056;
-include 'src/connect_db.php';
+include 'src/core/connect_db.php';
 $currentMapNum = 1;
 $nextMapNum = $currentMapNum + 1;
 $stmt = $pdo->prepare("SELECT map FROM games_maps WHERE lobby_id = ?");
@@ -78,3 +78,4 @@ $insert->execute([
     ':kd'     => $p['deaths'] > 0 ? round($p['kills'] / $p['deaths'], 2) : $p['kills'] // lokalny KD do wrzucenia
 ]);
 }
+

@@ -2,7 +2,7 @@ let notifOpened = false;
 let chatOpened = false;
 console.log("notifications.js loaded", Date.now());
 function fetchNotifications() {
-    fetch('src/get_notifications.php')
+    fetch('src/apis/get_notifications.php')
         .then(res => res.text())
         .then(text => {
             let data;
@@ -49,7 +49,7 @@ function fetchNotifications() {
 }
 
 function respondToTeamRequest(notifId, accept) {
-    fetch('src/respond_team_request.php', {
+    fetch('src/apis/respond_team_request.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ notifId, accept })
@@ -153,3 +153,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

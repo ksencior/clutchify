@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
@@ -41,11 +41,11 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != true) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <div class="team-form">
                 <h1>Dodaj post</h1>
-                <form action="src/create_post.php" method="post">
+                <form action="src/apis/create_post.php" method="post">
                     <label for="title">Tytuł</label>
                     <input type="text" name="title" id="title" required>
                     <label for="content">Treść</label>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != true) {
                 </form>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -70,3 +70,4 @@ if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] != true) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

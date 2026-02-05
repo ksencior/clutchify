@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
     header('Location: index.php');
@@ -66,7 +66,7 @@ switch($error) {
         
         <div class="login-box">
             <h1>Rejestracja</h1>
-            <form action="src/zarejestruj.php" method="post">
+            <form action="src/auth/zarejestruj.php" method="post">
                 <label for="mc_nickname">Nick</label>
                 <input type="text" name="mc_nickname" id="mc_nickname" required>
                 <label for="email">E-mail</label>
@@ -94,4 +94,5 @@ switch($error) {
     </div>
 </body>
 </html>
+
 

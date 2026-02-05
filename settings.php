@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
@@ -81,7 +81,7 @@ if (isset($_GET['success'])) {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <h1 class="w-300 f-upper ls-2">Ustawienia</h1>
             <div class="settings">
@@ -93,7 +93,7 @@ if (isset($_GET['success'])) {
                 <div class="setting">
                     <p>Adres e-mail</p>
                     <button name="change">Zmień</button>
-                    <form action="src/update_player.php?type=email" method="post">
+                    <form action="src/apis/update_player.php?type=email" method="post">
                         <input type="email" name="obecnyEmail" id="obecnyEmail" placeholder="Obecny adres e-mail" required>
                         <input type="email" name="nowyEmail" id="nowyEmail" placeholder="Nowy adres e-mail" required>
                         <input type="password" name="password" id="password-email" placeholder="Potwierdź hasło" required>
@@ -106,7 +106,7 @@ if (isset($_GET['success'])) {
                 <div class="setting">
                     <p>Zmiana hasła</p>
                     <button name="change">Zmień</button>
-                    <form action="src/update_player.php?type=password" method="post">
+                    <form action="src/apis/update_player.php?type=password" method="post">
                         <input type="password" name="obecneHaslo" id="obecneHaslo" placeholder="Obecne hasło" required>
                         <input type="password" name="noweHaslo" id="noweHaslo" placeholder="Nowe hasło" required>
                         <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Potwierdź nowe hasło" required>
@@ -120,7 +120,7 @@ if (isset($_GET['success'])) {
                     <p <?php echo (empty($_SESSION['steam_id']) || $_SESSION['steam_id'] == NULL)?'style=color:red;':'' ?>>Połączenie konta z kontem Steam</p>
                     <?php 
                         if (empty($_SESSION['steam_id']) || $_SESSION['steam_id'] == NULL) {
-                            echo '<button onclick="location.href=`src/connect_steam.php`">Połącz</button>';
+                            echo '<button onclick="location.href=`src/auth/connect_steam.php`">Połącz</button>';
                         } else {
                             echo '<button disabled>Połączono</button>';
                         }
@@ -138,7 +138,7 @@ if (isset($_GET['success'])) {
                         ?>]
                         </p>
                     <button name="change">Zmień</button>
-                    <form action="src/update_player.php?type=imie" method="post">
+                    <form action="src/apis/update_player.php?type=imie" method="post">
                         <input type="text" name="imie" id="imie" placeholder="Imię i nazwisko" required>
                         <input type="password" name="password" id="password-imie" placeholder="Potwierdź hasło" required>
                         <div class="actions">
@@ -161,7 +161,7 @@ if (isset($_GET['success'])) {
                         ?>]
                     </p>
                     <button name="change">Zmień</button>
-                    <form action="src/update_player.php?type=plec" method="post">
+                    <form action="src/apis/update_player.php?type=plec" method="post">
                         <select name="plec" id="plec">
                             <option value="">Wybierz płeć</option>
                             <option value="m">Mężczyzna</option>
@@ -184,7 +184,7 @@ if (isset($_GET['success'])) {
                         ?>]
                         </p>
                     <button name="change">Zmień</button>
-                    <form action="src/update_player.php?type=klasa" method="post">
+                    <form action="src/apis/update_player.php?type=klasa" method="post">
                         <input type="text" name="klasa" id="klasa" placeholder="Klasa np. 4TI, 2LO" maxlength="3" required>
                         <input type="password" name="password" id="password-klasa" placeholder="Potwierdź hasło" required>
                         <div class="actions">
@@ -202,11 +202,11 @@ if (isset($_GET['success'])) {
                 </div>
                 <h3 class="w-300 f-upper ls-2">Inne</h3>
                 <div class="setting">
-                    <a href="src/logout.php">Wyloguj się</a>
+                    <a href="src/auth/logout.php">Wyloguj się</a>
                 </div>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -229,3 +229,4 @@ if (isset($_GET['success'])) {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

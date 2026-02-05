@@ -1,6 +1,6 @@
 <?php 
-include_once 'src/connect_db.php';
-include_once 'src/fetch_steam_data.php';
+include_once 'src/core/connect_db.php';
+include_once 'src/auth/fetch_steam_data.php';
 if (!isset($_SESSION['logged']) || !$_SESSION['logged']) {
     header('Location: login.php');
 }
@@ -56,7 +56,7 @@ try {
 </head>
 <body>
     <div id="root">
-        <?php include 'src/navbar.php'; ?>
+        <?php include 'src/views/partials/navbar.php'; ?>
         <div class="content">
             <img src="assets/img/promo_poster.png" alt="" class="promo-poster">
             <?php if ($matchLive): ?>
@@ -89,7 +89,7 @@ try {
                         echo '
                         <div class="steam-connect">
                             <p>Nie połączyłeś jeszcze swojego konta steam.</p>
-                            <button onclick="location.href=`src/connect_steam.php`"><i class="fa-brands fa-steam"></i>Połącz za pomocą steam</button>
+                            <button onclick="location.href=`src/auth/connect_steam.php`"><i class="fa-brands fa-steam"></i>Połącz za pomocą steam</button>
                         </div>
                         ';
                     } else {
@@ -166,7 +166,7 @@ try {
                 </div>
             </div>
         </div>
-        <?php include 'src/sidebar_load.php';?>
+        <?php include 'src/views/partials/sidebar_load.php';?>
         <div class="notifications-menu"></div>
         <div class="team-chat-window">
             <div class="chat-header">
@@ -182,3 +182,4 @@ try {
     <script src="assets/js/mobile-menu.js"></script>
 </body>
 </html>
+

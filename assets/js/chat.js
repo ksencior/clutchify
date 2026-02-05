@@ -1,5 +1,5 @@
 function loadMessages() {
-    fetch('src/get_messages.php')
+    fetch('src/apis/get_messages.php')
         .then(res => res.json())
         .then(data => {
             const messagesDiv = document.querySelector('.team-chat-window .chat-messages');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('message', message);
 
-        fetch('src/send_message.php', {
+        fetch('src/apis/send_message.php', {
             method: 'POST',
             body: formData
         }).then(() => {
@@ -53,3 +53,4 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatOpened) loadMessages();
     }, 1000);
 });
+

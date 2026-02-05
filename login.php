@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once 'src/connect_db.php';
+include_once 'src/core/connect_db.php';
 
 if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
     header('Location: index.php');
@@ -71,7 +71,7 @@ if (isset($_GET['registered']) && $_GET['registered'] == 'true') {
 
         <div class="login-box">
             <h1>Zaloguj się</h1>
-            <form action="src/zaloguj.php" method="post">
+            <form action="src/auth/zaloguj.php" method="post">
                 <label for="email">Adres e-mail</label>
                 <input type="email" name="email" id="email">
                 <label for="password">Hasło:</label>
@@ -93,3 +93,4 @@ if (isset($_GET['registered']) && $_GET['registered'] == 'true') {
     </div>
 </body>
 </html>
+
