@@ -22,8 +22,6 @@ A custom-built PHP web application for managing Counter-Strike 2 tournaments. Th
 - **Database**: MySQL / MariaDB
 - **Frontend**: HTML5, Vanilla CSS, JavaScript
 - **Dependencies**: managed via Composer
-  - `google/protobuf`
-  - `textalk/websocket`
   - `thedudeguy/rcon` (Valve Source RCON)
 
 ## ⚙️ Installation
@@ -73,3 +71,4 @@ A custom-built PHP web application for managing Counter-Strike 2 tournaments. Th
 ## ⚠️ Known Limitations
 
 - **Concurrency**: The current `series_end` logic in `matchzy_events.php` (around line 350) executes a truncation of active game tables. This implies the system currently creates a clean state after every series, effectively supporting **only one active match series at a time**.
+
