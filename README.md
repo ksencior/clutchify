@@ -1,6 +1,11 @@
 ﻿# Clutchify.gg
-
 A custom-built PHP web application for managing Counter-Strike 2 tournaments. This platform handles team registration, automatic match generation, live score tracking via MatchZy webhooks, and player statistics.
+
+
+<img width="256" height="256" alt="clutchify-w-text" src="https://github.com/user-attachments/assets/fef4fb37-0812-43a9-8835-716768e49507" />
+
+> [!WARNING]
+> Clutchify.gg is still in Work In Progress state!
 
 ## 🚀 Features
 
@@ -71,4 +76,5 @@ A custom-built PHP web application for managing Counter-Strike 2 tournaments. Th
 ## ⚠️ Known Limitations
 
 - **Concurrency**: The current `series_end` logic in `matchzy_events.php` (around line 350) executes a truncation of active game tables. This implies the system currently creates a clean state after every series, effectively supporting **only one active match series at a time**.
+
 
