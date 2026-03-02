@@ -1,80 +1,64 @@
-﻿# Clutchify.gg
-A custom-built PHP web application for managing Counter-Strike 2 tournaments. This platform handles team registration, automatic match generation, live score tracking via MatchZy webhooks, and player statistics.
+# Clutchify 🎮
 
+**Clutchify** is a lightweight, framework-free web platform designed for managing **Counter-Strike 2 (CS2)** tournaments. Built with native PHP and MySQL, it provides a straightforward solution for organizing esports events, managing teams, and tracking match progress.
 
-<img width="256" height="256" alt="clutchify-w-text" src="https://github.com/user-attachments/assets/fef4fb37-0812-43a9-8835-716768e49507" />
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 > [!WARNING]
-> Clutchify.gg is still in Work In Progress state!
+> Be aware, that Clutchify.gg is still in Work In Progress state.
 
-## 🚀 Features
+<img src="./assets/img/clutchify-w-text.png" width="256" height="256">
 
-- **User Management**: Steam OpenID authentication.
-- **Tournament System**:
-  - Team creation and management.
-  - Automated match scheduling.
-  - Map veto system (Ban/Pick phase).
-  - Real-time match status (Live/Waiting/Finished).
-- **Live Data Integration**:
-  - Integrates with CS2 servers using **MatchZy**.
-  - Real-time updates for scores, current map, and round history.
-  - Automatic stats tracking (Kills, Deaths, Assists, HS%, MVPs).
-- **Media**: Twitch stream embedding and news posts.
+## 🚀 Key Features
+
+- **Automated Web Installer:** Easy setup wizard to configure your database and admin account in seconds.
+- **Tournament Management:** Create and manage brackets, teams, and match progressions.
+- **Steam & RCON Integration:** Built-in support for Steam API and RCON server commands for match control.
+- **User & Team System:** Full player registration, team creation, and roster management.
+- **Pure Performance:** No heavy frameworks (React/Vue/Laravel). Just pure, optimized PHP and native JS.
+- **Responsive Esports UI:** A modern, dark-themed interface tailored for the CS2 community.
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Native PHP (8.0+)
-- **Database**: MySQL / MariaDB
-- **Frontend**: HTML5, Vanilla CSS, JavaScript
-- **Dependencies**: managed via Composer
-  - `thedudeguy/rcon` (Valve Source RCON)
+- **Backend:** Native PHP (Procedural/OOP)
+- **Database:** MySQL
+- **Frontend:** Vanilla HTML5, CSS3, and JavaScript
+- **Server:** Compatible with Apache/Nginx (XAMPP, WAMP, etc.)
 
-## ⚙️ Installation
+## 📦 Quick Installation
 
-### Prerequisites
-- PHP 8.0 or higher
-- Composer
-- MySQL Database
-- A CS2 Server with [MatchZy](https://github.com/shobhit-pathak/MatchZy) installed.
+Clutchify features a built-in installer to get you up and running without manual SQL imports.
 
-### Setup
-
-1. **Clone the repository**
+1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd clutchify
+   git clone https://github.com/ksencior/clutchify.git
    ```
+2. **Upload to Server:**
+  Move the project files to your web server's root (e.g., `htdocs` or `/var/www/html`).
+3. **Run the Installer:**
+  Open your browser and navigate to:
+    ```bash
+    http://your-domain.com/
+    ```
+4. **Follow the Wizard:**
+  - Enter your MySQL Database credentials.
+  - Set your App Name and Base URL.
+  - Create your Admin Account.
+  - The installer will automatically create the database, import tables, and generate your .env file.
+5. **Post-Installation:**
+  For security, it is recommended to delete or restrict access to install.php once the setup is complete.
 
-2. **Install Dependencies**
-   ```bash
-   composer install
-   ```
+## ⚙️ Post-Install Configuration
+Once installed, you can further customize your .env file to enable advanced features:\
+  **STEAM_API_KEY:** Required for Steam OpenID login.\
+  **RCON settings:** Required for automated game server management.
 
-3. **Database Configuration**
-   - Import the schema from `zsnchampions.sql` into your database.
-   - Update database credentials in `src/connect_db.php`:
-     ```php
-     $host = '127.0.0.1:3306';
-     $dbname = 'tournament_app_template';
-     $user = 'root';
-     $password = '';
-     ```
-
-4. **Server Configuration**
-   - Check `src/matchzy_events.php` to configure webhook handling.
-   - **Note**: Currently, the CS2 server IP for new games is configured in `src/matchzy_events.php`. Ensure this matches your game server.
-
-## 📁 Project Structure
-
-- `src/`: Core logic and helper scripts.
-  - `matchzy_events.php`: Webhook handler for game events (round end, map result, etc.).
-  - `Config.php`: Main configuration class.
-  - `connect_steam.php`: Steam Auth handling.
-- `index.php`: Main dashboard / landing page.
-- `zsnchampions.sql`: Database schema export.
-
-## ⚠️ Known Limitations
-
-- **Concurrency**: The current `series_end` logic in `matchzy_events.php` (around line 350) executes a truncation of active game tables. This implies the system currently creates a clean state after every series, effectively supporting **only one active match series at a time**.
-
-
+## ⚠️ License & Legal Notice
+Copyright (c) 2024-2026 ksencior. All rights reserved.\
+<sub>This software is proprietary and remains the intellectual property of the author.
+Unauthorized use, reproduction, modification, or distribution of this code, in whole or in part, is strictly prohibited.
+You do not have permission to use this software for commercial purposes or host it publicly without explicit written consent from the author.
+If you are interested in using Clutchify for a tournament or contributing to the project, please contact the author directly via GitHub.<sub>
